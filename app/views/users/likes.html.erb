@@ -1,0 +1,21 @@
+<% if @likes.any? %>
+  <ul class="list-unstyled">
+    <% @likes.each do |like| %>
+      <% post = Micropost.find(like.micropost_id) %>
+      <% user = User.find(post.user_id) %>
+        <li class="media">
+          <img class="mr-2 rounded" src="<%= gravatar_url(user, { size: 50 }) %>" alt="">
+            <div class="media-body">
+              <div>
+                <%= link_to user.name, user_path(user)%>
+              </div>
+              <div>
+                <p><%= post.content %></p>
+              </div>
+            </div>
+        </li>
+    <% end %>
+  </ul>
+  <%= paginate @likes %>
+<% end %>
+	  
